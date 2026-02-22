@@ -30,10 +30,10 @@ public class Wish {
   private String note;
 
   @Column(nullable = false)
-  private Short meter;
+  private Integer meter;
 
   @Column(nullable = false)
-  private Long quantity;
+  private Integer quantity;
 
   private String about;
 
@@ -127,19 +127,19 @@ public class Wish {
     this.note = note;
   }
 
-  public Short getMeter() {
+  public Integer getMeter() {
     return meter;
   }
 
-  public void setMeter(Short meter) {
+  public void setMeter(Integer meter) {
     this.meter = meter;
   }
 
-  public Long getQuantity() {
+  public Integer getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(Long quantity) {
+  public void setQuantity(Integer quantity) {
     this.quantity = quantity;
   }
 

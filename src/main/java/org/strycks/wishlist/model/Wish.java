@@ -11,6 +11,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +43,8 @@ public class Wish {
 
   @Column(nullable = false)
   private String status = "PENDING";
+
+  private LocalDateTime deadline;
 
   // multivalued attribute, create an immediate table named "wish_tag"
   // has two columns, "wish_id" referencing "id" and "tag".
@@ -73,7 +79,7 @@ public class Wish {
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "retailer")
-  private List<String> retailer = new ArrayList<>();
+  private List<String> retailers = new ArrayList<>();
 
   @ElementCollection
   @Enumerated(EnumType.STRING)
@@ -85,6 +91,27 @@ public class Wish {
   private List<WishMethod> methods = new ArrayList<>();
 
   public Wish() {
+  }
+
+  /**
+   * Deep copy.
+   */
+  public Wish copy() {
+    Wish wish = new Wish();
+    wish.setName(name);
+    wish.setPrice(price);
+    wish.setNote(note);
+    wish.setMeter(meter);
+    wish.setQuantity(quantity);
+    wish.setStatus(status);
+    wish.setAbout(about);
+    wish.setDeadline(deadline);
+    wish.setTags(new ArrayList<>(tags));
+    wish.setConditions(new ArrayList<>(conditions));
+    wish.setUrls(new ArrayList<>(urls));
+    wish.setRetailers(new ArrayList<>(retailers));
+    wish.setMethods(new ArrayList<>(methods));
+    return wish;
   }
 
   public Long getId() {
@@ -175,12 +202,12 @@ public class Wish {
     this.urls = urls;
   }
 
-  public List<String> getRetailer() {
-    return retailer;
+  public List<String> getRetailers() {
+    return retailers;
   }
 
-  public void setRetailer(List<String> retailer) {
-    this.retailer = retailer;
+  public void setRetailers(List<String> retailer) {
+    this.retailers = retailer;
   }
 
   public List<WishMethod> getMethods() {
@@ -189,5 +216,13 @@ public class Wish {
 
   public void setMethods(List<WishMethod> methods) {
     this.methods = methods;
+  }
+
+  public LocalDateTime getDeadline() {
+    return deadline;
+  }
+
+  public void setDeadline(LocalDateTime deadline) {
+    this.deadline = deadline;
   }
 }

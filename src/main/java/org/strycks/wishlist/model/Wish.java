@@ -1,5 +1,6 @@
 package org.strycks.wishlist.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -21,23 +22,24 @@ import java.util.List;
 @Entity
 @Table(name = "wish")
 public class Wish {
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Column(nullable = false)
-  private String name;
+  private String name = "lorem ipsum";
 
   @Column(nullable = false)
-  private Long price;
+  private Long price = -1L;
 
   private String note;
 
   @Column(nullable = false)
-  private Integer meter;
+  private Integer meter = 0;
 
   @Column(nullable = false)
-  private Integer quantity;
+  private Integer quantity = 1;
 
   private String about;
 
@@ -63,7 +65,7 @@ public class Wish {
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "condition")
-  private List<WishCondition> conditions = new ArrayList<>();
+  private List<WishCondition> conditions = new ArrayList<>(List.of(WishCondition.NEW));
 
   @ElementCollection
   @CollectionTable(
@@ -88,7 +90,7 @@ public class Wish {
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "method")
-  private List<WishMethod> methods = new ArrayList<>();
+  private List<WishMethod> methods = new ArrayList<>(List.of(WishMethod.ONLINE));
 
   public Wish() {
   }

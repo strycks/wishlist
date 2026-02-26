@@ -1,8 +1,11 @@
 package org.strycks.wishlist;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,11 @@ public class WishlistController {
   @GetMapping
   public List<Wish> getAllWishes() {
     return repository.findAll();
+  }
+
+  @GetMapping("/{id}")
+  public Optional<Wish> getWish(@PathVariable Long id) {
+    return repository.findById(id);
   }
 
   @PostMapping

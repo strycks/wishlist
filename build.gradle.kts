@@ -23,6 +23,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-h2console")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1")
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-data-ldap-test")
     testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")

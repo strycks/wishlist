@@ -15,6 +15,8 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * The type Wish.
@@ -56,7 +58,7 @@ public class Wish {
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "tag")
-  private List<String> tags = new ArrayList<>();
+  private Set<String> tags = new TreeSet<>();
 
   @ElementCollection
   @Enumerated(EnumType.STRING)
@@ -65,7 +67,7 @@ public class Wish {
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "condition")
-  private List<WishCondition> conditions = new ArrayList<>(List.of(WishCondition.NEW));
+  private Set<WishCondition> conditions = new TreeSet<>(List.of(WishCondition.NEW));
 
   @ElementCollection
   @CollectionTable(
@@ -73,7 +75,7 @@ public class Wish {
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "url")
-  private List<String> urls = new ArrayList<>();
+  private Set<String> urls = new TreeSet<>();
 
   @ElementCollection
   @CollectionTable(
@@ -81,7 +83,7 @@ public class Wish {
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "retailer")
-  private List<String> retailers = new ArrayList<>();
+  private Set<String> retailers = new TreeSet<>();
 
   @ElementCollection
   @Enumerated(EnumType.STRING)
@@ -90,7 +92,7 @@ public class Wish {
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "method")
-  private List<WishMethod> methods = new ArrayList<>(List.of(WishMethod.ONLINE));
+  private Set<WishMethod> methods = new TreeSet<>(List.of(WishMethod.ONLINE));
 
   /**
    * Instantiates a new Wish.
@@ -113,11 +115,11 @@ public class Wish {
     wish.setStatus(status);
     wish.setAbout(about);
     wish.setDeadline(deadline);
-    wish.setTags(new ArrayList<>(tags));
-    wish.setConditions(new ArrayList<>(conditions));
-    wish.setUrls(new ArrayList<>(urls));
-    wish.setRetailers(new ArrayList<>(retailers));
-    wish.setMethods(new ArrayList<>(methods));
+    wish.setTags(new TreeSet<>(tags));
+    wish.setConditions(new TreeSet<>(conditions));
+    wish.setUrls(new TreeSet<>(urls));
+    wish.setRetailers(new TreeSet<>(retailers));
+    wish.setMethods(new TreeSet<>(methods));
     return wish;
   }
 
@@ -270,7 +272,7 @@ public class Wish {
    *
    * @return the tags
    */
-  public List<String> getTags() {
+  public Set<String> getTags() {
     return tags;
   }
 
@@ -279,7 +281,7 @@ public class Wish {
    *
    * @param tags the tags
    */
-  public void setTags(List<String> tags) {
+  public void setTags(Set<String> tags) {
     this.tags = tags;
   }
 
@@ -288,7 +290,7 @@ public class Wish {
    *
    * @return the conditions
    */
-  public List<WishCondition> getConditions() {
+  public Set<WishCondition> getConditions() {
     return conditions;
   }
 
@@ -297,7 +299,7 @@ public class Wish {
    *
    * @param conditions the conditions
    */
-  public void setConditions(List<WishCondition> conditions) {
+  public void setConditions(Set<WishCondition> conditions) {
     this.conditions = conditions;
   }
 
@@ -306,7 +308,7 @@ public class Wish {
    *
    * @return the urls
    */
-  public List<String> getUrls() {
+  public Set<String> getUrls() {
     return urls;
   }
 
@@ -315,7 +317,7 @@ public class Wish {
    *
    * @param urls the urls
    */
-  public void setUrls(List<String> urls) {
+  public void setUrls(Set<String> urls) {
     this.urls = urls;
   }
 
@@ -324,7 +326,7 @@ public class Wish {
    *
    * @return the retailers
    */
-  public List<String> getRetailers() {
+  public Set<String> getRetailers() {
     return retailers;
   }
 
@@ -333,7 +335,7 @@ public class Wish {
    *
    * @param retailer the retailer
    */
-  public void setRetailers(List<String> retailer) {
+  public void setRetailers(Set<String> retailer) {
     this.retailers = retailer;
   }
 
@@ -342,7 +344,7 @@ public class Wish {
    *
    * @return the methods
    */
-  public List<WishMethod> getMethods() {
+  public Set<WishMethod> getMethods() {
     return methods;
   }
 
@@ -351,7 +353,7 @@ public class Wish {
    *
    * @param methods the methods
    */
-  public void setMethods(List<WishMethod> methods) {
+  public void setMethods(Set<WishMethod> methods) {
     this.methods = methods;
   }
 

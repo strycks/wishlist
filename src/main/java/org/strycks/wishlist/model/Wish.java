@@ -12,13 +12,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Wish.
+ */
 @Entity
 @Table(name = "wish")
 public class Wish {
@@ -92,11 +92,16 @@ public class Wish {
   @Column(name = "method")
   private List<WishMethod> methods = new ArrayList<>(List.of(WishMethod.ONLINE));
 
+  /**
+   * Instantiates a new Wish.
+   */
   public Wish() {
   }
 
   /**
    * Deep copy.
+   *
+   * @return the wish
    */
   public Wish copy() {
     Wish wish = new Wish();
@@ -116,114 +121,254 @@ public class Wish {
     return wish;
   }
 
+  /**
+   * Gets id.
+   *
+   * @return the id
+   */
   public Long getId() {
     return id;
   }
 
+  /**
+   * Sets id.
+   *
+   * @param id the id
+   */
   public void setId(Long id) {
     this.id = id;
   }
 
+  /**
+   * Gets name.
+   *
+   * @return the name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Sets name.
+   *
+   * @param name the name
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Gets status.
+   *
+   * @return the status
+   */
   public String getStatus() {
     return status;
   }
 
+  /**
+   * Sets status.
+   *
+   * @param status the status
+   */
   public void setStatus(String status) {
     this.status = status;
   }
 
+  /**
+   * Gets price.
+   *
+   * @return the price
+   */
   public Long getPrice() {
     return price;
   }
 
+  /**
+   * Sets price.
+   *
+   * @param price the price
+   */
   public void setPrice(Long price) {
     this.price = price;
   }
 
+  /**
+   * Gets note.
+   *
+   * @return the note
+   */
   public String getNote() {
     return note;
   }
 
+  /**
+   * Sets note.
+   *
+   * @param note the note
+   */
   public void setNote(String note) {
     this.note = note;
   }
 
+  /**
+   * Gets meter.
+   *
+   * @return the meter
+   */
   public Integer getMeter() {
     return meter;
   }
 
+  /**
+   * Sets meter.
+   *
+   * @param meter the meter
+   */
   public void setMeter(Integer meter) {
     this.meter = meter;
   }
 
+  /**
+   * Gets quantity.
+   *
+   * @return the quantity
+   */
   public Integer getQuantity() {
     return quantity;
   }
 
+  /**
+   * Sets quantity.
+   *
+   * @param quantity the quantity
+   */
   public void setQuantity(Integer quantity) {
     this.quantity = quantity;
   }
 
+  /**
+   * Gets about.
+   *
+   * @return the about
+   */
   public String getAbout() {
     return about;
   }
 
+  /**
+   * Sets about.
+   *
+   * @param about the about
+   */
   public void setAbout(String about) {
     this.about = about;
   }
 
+  /**
+   * Gets tags.
+   *
+   * @return the tags
+   */
   public List<String> getTags() {
     return tags;
   }
 
+  /**
+   * Sets tags.
+   *
+   * @param tags the tags
+   */
   public void setTags(List<String> tags) {
     this.tags = tags;
   }
 
+  /**
+   * Gets conditions.
+   *
+   * @return the conditions
+   */
   public List<WishCondition> getConditions() {
     return conditions;
   }
 
+  /**
+   * Sets conditions.
+   *
+   * @param conditions the conditions
+   */
   public void setConditions(List<WishCondition> conditions) {
     this.conditions = conditions;
   }
 
+  /**
+   * Gets urls.
+   *
+   * @return the urls
+   */
   public List<String> getUrls() {
     return urls;
   }
 
+  /**
+   * Sets urls.
+   *
+   * @param urls the urls
+   */
   public void setUrls(List<String> urls) {
     this.urls = urls;
   }
 
+  /**
+   * Gets retailers.
+   *
+   * @return the retailers
+   */
   public List<String> getRetailers() {
     return retailers;
   }
 
+  /**
+   * Sets retailers.
+   *
+   * @param retailer the retailer
+   */
   public void setRetailers(List<String> retailer) {
     this.retailers = retailer;
   }
 
+  /**
+   * Gets methods.
+   *
+   * @return the methods
+   */
   public List<WishMethod> getMethods() {
     return methods;
   }
 
+  /**
+   * Sets methods.
+   *
+   * @param methods the methods
+   */
   public void setMethods(List<WishMethod> methods) {
     this.methods = methods;
   }
 
+  /**
+   * Gets deadline.
+   *
+   * @return the deadline
+   */
   public LocalDateTime getDeadline() {
     return deadline;
   }
 
+  /**
+   * Sets deadline.
+   *
+   * @param deadline the deadline
+   */
   public void setDeadline(LocalDateTime deadline) {
     this.deadline = deadline;
   }

@@ -1,5 +1,7 @@
 package org.strycks.wishlist;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -7,14 +9,19 @@ import org.springframework.stereotype.Component;
 import org.strycks.wishlist.model.Wish;
 import org.strycks.wishlist.model.WishMethod;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-
+/**
+ * The type Temp component.
+ */
 @Component
 public class TempComponent implements ApplicationRunner {
 
   private WishlistRepository repository;
 
+  /**
+   * Sets repository.
+   *
+   * @param repository the repository
+   */
   @Autowired
   public void setRepository(WishlistRepository repository) {
     this.repository = repository;

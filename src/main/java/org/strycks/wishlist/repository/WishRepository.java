@@ -1,4 +1,4 @@
-package org.strycks.wishlist;
+package org.strycks.wishlist.repository;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +9,7 @@ import org.strycks.wishlist.model.Wish;
  * The interface Wishlist repository.
  */
 @Repository
-public interface WishlistRepository extends JpaRepository<Wish, Long> {
+public interface WishRepository extends JpaRepository<Wish, Long> {
   /**
    * Find by status list.
    *

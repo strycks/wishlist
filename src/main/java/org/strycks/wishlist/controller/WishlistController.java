@@ -1,4 +1,4 @@
-package org.strycks.wishlist;
+package org.strycks.wishlist.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.strycks.wishlist.model.Wish;
+import org.strycks.wishlist.repository.WishRepository;
 
 /**
  * The type Wishlist controller.
@@ -18,14 +19,14 @@ import org.strycks.wishlist.model.Wish;
 @RestController
 @RequestMapping("/api/wishlist")
 public class WishlistController {
-  private final WishlistRepository repository;
+  private final WishRepository repository;
 
   /**
    * Instantiates a new Wishlist controller.
    *
    * @param repository the repository
    */
-  public WishlistController(WishlistRepository repository) {
+  public WishlistController(WishRepository repository) {
     this.repository = repository;
   }
 

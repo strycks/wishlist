@@ -1,6 +1,7 @@
 package org.strycks.wishlist.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -11,18 +12,21 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 /**
  * The type Wish.
  */
 @Entity
-@Table(name = "wish")
+@Table(name = "wishes")
 public class Wish {
   @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   @Id
@@ -50,49 +54,49 @@ public class Wish {
 
   private LocalDateTime deadline;
 
-  // multivalued attribute, create an immediate table named "wish_tag"
-  // has two columns, "wish_id" referencing "id" and "tag".
-  @ElementCollection
-  @CollectionTable(
-      name = "wish_tag",
-      joinColumns = @JoinColumn(name = "wish_id")
+  @ManyToMany(cascade = {CascadeType.MERGE})
+  @JoinTable(
+      name = "wish_tags",
+      joinColumns = @JoinColumn(name = "wish_id"),
+      inverseJoinColumns = @JoinColumn(name = "tag_id")
   )
-  @Column(name = "tag")
-  private Set<String> tags = new TreeSet<>();
+  private Set<Tag> tags = new HashSet<>();
 
   @ElementCollection
   @Enumerated(EnumType.STRING)
   @CollectionTable(
-      name = "wish_condition",
+      name = "wish_conditions",
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "condition")
-  private Set<WishCondition> conditions = new TreeSet<>(List.of(WishCondition.NEW));
+  private Set<WishCondition> conditions = new HashSet<>(List.of(WishCondition.NEW));
 
+  // multivalued attribute, create an immediate table named "wish_urls"
+  // has two columns, "wish_id" referencing "id" and "url".
   @ElementCollection
   @CollectionTable(
-      name = "wish_url",
+      name = "wish_urls",
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "url")
-  private Set<String> urls = new TreeSet<>();
+  private Set<String> urls = new HashSet<>();
 
   @ElementCollection
   @CollectionTable(
-      name = "wish_retailer",
+      name = "wish_retailers",
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "retailer")
-  private Set<String> retailers = new TreeSet<>();
+  private Set<String> retailers = new HashSet<>();
 
   @ElementCollection
   @Enumerated(EnumType.STRING)
   @CollectionTable(
-      name = "wish_method",
+      name = "wish_methods",
       joinColumns = @JoinColumn(name = "wish_id")
   )
   @Column(name = "method")
-  private Set<WishMethod> methods = new TreeSet<>(List.of(WishMethod.ONLINE));
+  private Set<WishMethod> methods = new HashSet<>(List.of(WishMethod.ONLINE));
 
   /**
    * Instantiates a new Wish.
@@ -115,12 +119,32 @@ public class Wish {
     wish.setStatus(status);
     wish.setAbout(about);
     wish.setDeadline(deadline);
-    wish.setTags(new TreeSet<>(tags));
-    wish.setConditions(new TreeSet<>(conditions));
-    wish.setUrls(new TreeSet<>(urls));
-    wish.setRetailers(new TreeSet<>(retailers));
-    wish.setMethods(new TreeSet<>(methods));
+    for (Tag tag : tags) {
+      wish.addTag(tag);
+    }
+    wish.setConditions(new HashSet<>(conditions));
+    wish.setUrls(new HashSet<>(urls));
+    wish.setRetailers(new HashSet<>(retailers));
+    wish.setMethods(new HashSet<>(methods));
     return wish;
+  }
+
+  /**
+   * Remove a tag from the current wish.
+   */
+  public void removeTag(Tag tag) {
+    this.tags.remove(tag);
+    tag.getWishes().remove(this);
+    System.err.println(tag.getWishes().size() + " " + tags.size());
+  }
+
+  /**
+   * Add a tag to the current wish.
+   */
+  public void addTag(Tag tag) {
+    this.tags.add(tag);
+    tag.getWishes().add(this);
+    System.err.println(tag.getWishes().size() + " " + tags.size());
   }
 
   /**
@@ -272,7 +296,7 @@ public class Wish {
    *
    * @return the tags
    */
-  public Set<String> getTags() {
+  public Set<Tag> getTags() {
     return tags;
   }
 
@@ -281,7 +305,7 @@ public class Wish {
    *
    * @param tags the tags
    */
-  public void setTags(Set<String> tags) {
+  public void setTags(Set<Tag> tags) {
     this.tags = tags;
   }
 

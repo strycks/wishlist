@@ -14,13 +14,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
 
 /**
  * The type Wish.
@@ -53,6 +52,12 @@ public class Wish {
   private String status = "PENDING";
 
   private LocalDateTime deadline;
+
+  private LocalDateTime creationDate = LocalDateTime.now();
+
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 
   @ManyToMany(cascade = {CascadeType.MERGE})
   @JoinTable(
@@ -397,5 +402,21 @@ public class Wish {
    */
   public void setDeadline(LocalDateTime deadline) {
     this.deadline = deadline;
+  }
+
+  public LocalDateTime getCreationDate() {
+    return creationDate;
+  }
+
+  public void setCreationDate(LocalDateTime creationDate) {
+    this.creationDate = creationDate;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 }

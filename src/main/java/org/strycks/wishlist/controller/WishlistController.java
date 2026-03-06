@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.strycks.wishlist.model.Wish;
+import org.strycks.wishlist.repository.UserRepository;
 import org.strycks.wishlist.repository.WishRepository;
 
 /**
@@ -19,15 +20,12 @@ import org.strycks.wishlist.repository.WishRepository;
 @RestController
 @RequestMapping("/api/wishlist")
 public class WishlistController {
-  private final WishRepository repository;
+  private final WishRepository wishRepository;
+  private final UserRepository userRepository;
 
-  /**
-   * Instantiates a new Wishlist controller.
-   *
-   * @param repository the repository
-   */
-  public WishlistController(WishRepository repository) {
-    this.repository = repository;
+  public WishlistController(WishRepository wishRepository, UserRepository userRepository) {
+    this.wishRepository = wishRepository;
+    this.userRepository = userRepository;
   }
 
   /**
@@ -37,7 +35,7 @@ public class WishlistController {
    */
   @GetMapping
   public List<Wish> getAllWishes() {
-    return repository.findAll();
+    return wishRepository.findAll();
   }
 
   /**
@@ -48,7 +46,7 @@ public class WishlistController {
    */
   @GetMapping("/{id}")
   public Optional<Wish> getWish(@PathVariable Long id) {
-    return repository.findById(id);
+    return wishRepository.findById(id);
   }
 
   /**
@@ -59,6 +57,6 @@ public class WishlistController {
    */
   @PostMapping
   public Wish addWish(@RequestBody Wish wish) {
-    return repository.save(wish);
+    return wishRepository.save(wish);
   }
 }

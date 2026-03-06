@@ -2,14 +2,20 @@ package org.strycks.wishlist;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.Set;
+import javax.swing.text.html.HTML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.strycks.wishlist.controller.WishlistController;
 import org.strycks.wishlist.model.Tag;
+import org.strycks.wishlist.model.User;
 import org.strycks.wishlist.model.Wish;
 import org.strycks.wishlist.model.WishMethod;
 import org.strycks.wishlist.repository.TagRepository;
+import org.strycks.wishlist.repository.UserRepository;
 import org.strycks.wishlist.repository.WishRepository;
 
 /**
@@ -20,6 +26,7 @@ public class TempComponent implements ApplicationRunner {
 
   private WishRepository repository;
   private TagRepository tagRepository;
+  private UserRepository userRepository;
 
   /**
    * Sets repository.
@@ -36,9 +43,15 @@ public class TempComponent implements ApplicationRunner {
     this.tagRepository = tagRepository;
   }
 
+  @Autowired
+  public void setUserRepository(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
+    User user = new User();
+    user.setName("abc");
     Wish wish = new Wish();
     wish.setName("Sylvanian");
     wish.setMeter(1);
@@ -55,9 +68,15 @@ public class TempComponent implements ApplicationRunner {
     wish.setDeadline(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
     Wish wish2 = wish.copy();
     wish2.removeTag(tag2);
+    user.setWishes(Set.of(wish, wish2));
     tagRepository.save(tag);
     tagRepository.save(tag2);
     repository.save(wish2);
     repository.save(wish);
+
+
+    for (Wish x : repository.findAll()) {
+      System.out.println(x.getName());
+    }
   }
 }

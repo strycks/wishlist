@@ -55,9 +55,9 @@ public class Wish {
 
   private LocalDateTime creationDate = LocalDateTime.now();
 
-  @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
-  private User user;
+  // @ManyToOne
+  // @JoinColumn(name = "user", nullable = true)
+  // private User user;
 
   @ManyToMany(cascade = {CascadeType.MERGE})
   @JoinTable(
@@ -136,6 +136,8 @@ public class Wish {
 
   /**
    * Remove a tag from the current wish.
+   *
+   * @param tag the tag
    */
   public void removeTag(Tag tag) {
     this.tags.remove(tag);
@@ -145,6 +147,8 @@ public class Wish {
 
   /**
    * Add a tag to the current wish.
+   *
+   * @param tag the tag
    */
   public void addTag(Tag tag) {
     this.tags.add(tag);
@@ -404,19 +408,39 @@ public class Wish {
     this.deadline = deadline;
   }
 
+  /**
+   * Gets creation date.
+   *
+   * @return the creation date
+   */
   public LocalDateTime getCreationDate() {
     return creationDate;
   }
 
+  /**
+   * Sets creation date.
+   *
+   * @param creationDate the creation date
+   */
   public void setCreationDate(LocalDateTime creationDate) {
     this.creationDate = creationDate;
   }
 
-  public User getUser() {
-    return user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
-  }
+  // /**
+  //  * Gets user.
+  //  *
+  //  * @return the user
+  //  */
+  // public User getUser() {
+  //   return user;
+  // }
+  //
+  // /**
+  //  * Sets user.
+  //  *
+  //  * @param user the user
+  //  */
+  // public void setUser(User user) {
+  //   this.user = user;
+  // }
 }

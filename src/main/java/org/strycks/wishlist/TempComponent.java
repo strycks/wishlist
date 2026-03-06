@@ -38,11 +38,21 @@ public class TempComponent implements ApplicationRunner {
     this.repository = repository;
   }
 
+  /**
+   * Sets tag repository.
+   *
+   * @param tagRepository the tag repository
+   */
   @Autowired
   public void setTagRepository(TagRepository tagRepository) {
     this.tagRepository = tagRepository;
   }
 
+  /**
+   * Sets user repository.
+   *
+   * @param userRepository the user repository
+   */
   @Autowired
   public void setUserRepository(UserRepository userRepository) {
     this.userRepository = userRepository;
@@ -50,8 +60,6 @@ public class TempComponent implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
-    User user = new User();
-    user.setName("abc");
     Wish wish = new Wish();
     wish.setName("Sylvanian");
     wish.setMeter(1);
@@ -68,12 +76,18 @@ public class TempComponent implements ApplicationRunner {
     wish.setDeadline(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
     Wish wish2 = wish.copy();
     wish2.removeTag(tag2);
-    user.setWishes(Set.of(wish, wish2));
     tagRepository.save(tag);
     tagRepository.save(tag2);
     repository.save(wish2);
     repository.save(wish);
-
+    User user = new User();
+    user.setName("a");
+    user.setPassword("$2a$12$cbwjBUZlQf0IojmsmeLUKuZ2C4KCtnPD4m6bVO6vgZaJKeYy97giy");
+    userRepository.save(user);
+    User user2 = new User();
+    user2.setName("b");
+    user2.setPassword("$2a$12$W0Upi/SZQGC0RjBVqa6G.er1Xl8UmGAB8Dbn8vDodjk8gl8RMpmBO");
+    userRepository.save(user2);
 
     for (Wish x : repository.findAll()) {
       System.out.println(x.getName());

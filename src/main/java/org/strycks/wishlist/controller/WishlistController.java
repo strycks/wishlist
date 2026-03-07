@@ -23,6 +23,12 @@ public class WishlistController {
   private final WishRepository wishRepository;
   private final UserRepository userRepository;
 
+  /**
+   * Instantiates a new Wishlist controller.
+   *
+   * @param wishRepository the wish repository
+   * @param userRepository the user repository
+   */
   public WishlistController(WishRepository wishRepository, UserRepository userRepository) {
     this.wishRepository = wishRepository;
     this.userRepository = userRepository;

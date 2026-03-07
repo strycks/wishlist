@@ -54,13 +54,12 @@ public class AuthController {
   @PostMapping("/login")
   public ResponseEntity<String> login(@RequestBody AuthRequest request) {
     try {
-      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username, request.password));
+      authenticationManager.authenticate(
+          new UsernamePasswordAuthenticationToken(request.username, request.password));
       String token = jwtTokenProvider.generateToken(request.username);
       return ResponseEntity.ok(token);
     } catch (Exception e) {
       return ResponseEntity.status(401).body("Wrong credentials!");
     }
   }
-
-
 }

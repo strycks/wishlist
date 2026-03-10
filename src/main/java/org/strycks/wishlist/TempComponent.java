@@ -60,37 +60,37 @@ public class TempComponent implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
-    Wish wish = new Wish();
-    wish.setName("Sylvanian");
-    wish.setMeter(1);
-    wish.setPrice(125000L);
-    Tag tag = new Tag();
-    tag.setName("Sylvanian");
-    Tag tag2 = new Tag();
-    tag2.setName("toy");
-    wish.addTag(tag);
-    wish.addTag(tag2);
-    wish.getMethods().add(WishMethod.ORDER);
-    wish.getMethods().add(WishMethod.ONLINE);
-    wish.setQuantity(1);
-    wish.setDeadline(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-    Wish wish2 = wish.copy();
-    wish2.removeTag(tag2);
-    tagRepository.save(tag);
-    tagRepository.save(tag2);
-    repository.save(wish2);
-    repository.save(wish);
-    User user = new User();
-    user.setName("a");
-    user.setPassword("$2a$12$cbwjBUZlQf0IojmsmeLUKuZ2C4KCtnPD4m6bVO6vgZaJKeYy97giy");
-    userRepository.save(user);
-    User user2 = new User();
-    user2.setName("b");
-    user2.setPassword("$2a$12$W0Upi/SZQGC0RjBVqa6G.er1Xl8UmGAB8Dbn8vDodjk8gl8RMpmBO");
-    userRepository.save(user2);
+    // Wish wish = new Wish();
+    // wish.setName("Sylvanian");
+    // wish.setMeter(1);
+    // wish.setPrice(125000L);
+    // Tag tag = new Tag();
+    // tag.setName("Sylvanian");
+    // Tag tag2 = new Tag();
+    // tag2.setName("toy");
+    // wish.addTag(tag);
+    // wish.addTag(tag2);
+    // wish.getMethods().add(WishMethod.ORDER);
+    // wish.getMethods().add(WishMethod.ONLINE);
+    // wish.setQuantity(1);
+    // wish.setDeadline(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+    // Wish wish2 = wish.copy();
+    // wish2.removeTag(tag2);
+    // tagRepository.save(tag);
+    // tagRepository.save(tag2);
+    // repository.save(wish2);
+    // repository.save(wish);
+    // User user = new User();
+    // user.setName("deewlynn");
+    // user.setPassword("$2a$12$tEhXJo/yzQFGl9MhXY5KjuCu0QyuL0mXS/prZu7EcmWcicElYg1ZW");
+    // userRepository.save(user);
+    // User user2 = new User();
+    // user2.setName("admin");
+    // user2.setPassword("$2a$12$woTnmeMqKmm95xfmQZMbBewQQm9D2fB7QllKLEjaRcm38IdKEH.62");
+    // userRepository.save(user2);
 
-    for (Wish x : repository.findAll()) {
-      System.out.println(x.getName());
-    }
+    // for (Wish x : repository.findAll()) {
+    //   System.out.println(x.getName());
+    // }
   }
 }

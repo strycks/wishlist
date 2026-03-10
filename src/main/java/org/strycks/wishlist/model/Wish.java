@@ -73,7 +73,7 @@ public class Wish {
       name = "wish_conditions",
       joinColumns = @JoinColumn(name = "wish_id")
   )
-  @Column(name = "condition")
+  @Column(name = "`condition`")
   private Set<WishCondition> conditions = new HashSet<>(List.of(WishCondition.NEW));
 
   // multivalued attribute, create an immediate table named "wish_urls"

@@ -34,7 +34,6 @@ class WishlistApplicationTests {
     wish.setName("Sylvanian");
     wish.setMeter(1);
     wish.setPrice(125000L);
-    wish.getTags().add("sylvanian");
     wish.setQuantity(1);
     String jsonWish = mapper.writeValueAsString(wish);
     mockMvc.perform(post("/api/wishlist").contentType(MediaType.APPLICATION_JSON).content(jsonWish));

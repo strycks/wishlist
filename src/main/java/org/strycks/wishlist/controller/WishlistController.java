@@ -16,7 +16,7 @@ import org.strycks.wishlist.repository.WishRepository;
 /**
  * The type Wishlist controller.
  */
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/wishlist")
 public class WishlistController {

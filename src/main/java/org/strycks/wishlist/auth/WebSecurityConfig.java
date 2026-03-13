@@ -79,7 +79,7 @@ public class WebSecurityConfig {
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
 
-    configuration.setAllowedOrigins(Arrays.asList("https://deewlynn-wishlist.netlify.app"));
+    configuration.setAllowedOrigins(Arrays.asList(System.getenv("FRONTEND_URL")));
     configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
     configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
     configuration.setAllowCredentials(true);

@@ -84,10 +84,10 @@ public class TempComponent implements ApplicationRunner {
     // user.setName("deewlynn");
     // user.setPassword("$2a$12$tEhXJo/yzQFGl9MhXY5KjuCu0QyuL0mXS/prZu7EcmWcicElYg1ZW");
     // userRepository.save(user);
-    // User user2 = new User();
-    // user2.setName("admin");
-    // user2.setPassword("$2a$12$woTnmeMqKmm95xfmQZMbBewQQm9D2fB7QllKLEjaRcm38IdKEH.62");
-    // userRepository.save(user2);
+    User user2 = new User();
+    user2.setName("admin");
+    user2.setPassword("$2a$12$zRxq.e.3YbrE3F.xsyom7.IxZ/DCL6oYYzNn/GQwrPzG03MhoA4Tq");
+    userRepository.save(user2);
 
     // for (Wish x : repository.findAll()) {
     //   System.out.println(x.getName());

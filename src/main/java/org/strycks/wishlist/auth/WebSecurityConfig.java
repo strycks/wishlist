@@ -65,7 +65,7 @@ public class WebSecurityConfig {
   }
 
   /**
-   * Authentication manager authentication manager.
+   * Authentication manager.
    *
    * @param config the config
    * @return the authentication manager
@@ -75,12 +75,17 @@ public class WebSecurityConfig {
     return config.getAuthenticationManager();
   }
 
+  /**
+   * Cors configuration source cors configuration source.
+   *
+   * @return the cors configuration source
+   */
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
 
     configuration.setAllowedOrigins(Arrays.asList(System.getenv("FRONTEND_URL")));
-    configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "PUT", "DELETE"));
     configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
     configuration.setAllowCredentials(true);
 

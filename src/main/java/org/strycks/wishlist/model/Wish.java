@@ -49,7 +49,8 @@ public class Wish {
   private String about;
 
   @Column(nullable = false)
-  private String status = "PENDING";
+  @Enumerated(EnumType.STRING)
+  private WishStatus status = WishStatus.PENDING;
 
   private LocalDateTime deadline;
 
@@ -197,7 +198,7 @@ public class Wish {
    *
    * @return the status
    */
-  public String getStatus() {
+  public WishStatus getStatus() {
     return status;
   }
 
@@ -206,7 +207,7 @@ public class Wish {
    *
    * @param status the status
    */
-  public void setStatus(String status) {
+  public void setStatus(WishStatus status) {
     this.status = status;
   }
 

@@ -84,7 +84,7 @@ public class Wish {
       name = "wish_urls",
       joinColumns = @JoinColumn(name = "wish_id")
   )
-  @Column(name = "url")
+  @Column(name = "url", columnDefinition = "TEXT")
   private Set<String> urls = new HashSet<>();
 
   @ElementCollection

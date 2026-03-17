@@ -1,45 +1,33 @@
 package org.strycks.wishlist.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Wish dto.
+ * The type Wish request dto.
  */
-public class WishDTO {
-  private Long id;
+public class WishRequestDTO {
+  @NotBlank
   private String name;
+  @NotNull
   private Long price;
   private String note;
+  @NotNull
   private Integer meter;
+  @NotNull
   private Integer quantity;
   private String about;
+  @NotBlank
   private String status;
   private LocalDateTime deadline;
-  private LocalDateTime creationDate;
-  private List<String> tags;
-  private List<String> conditions;
-  private List<String> urls;
-  private List<String> retailers;
-  private List<String> methods;
-
-  /**
-   * Gets id.
-   *
-   * @return the id
-   */
-  public Long getId() {
-    return id;
-  }
-
-  /**
-   * Sets id.
-   *
-   * @param id the id
-   */
-  public void setId(Long id) {
-    this.id = id;
-  }
+  private List<String> tags = new ArrayList<>();
+  private List<String> conditions = new ArrayList<>();
+  private List<String> urls = new ArrayList<>();
+  private List<String> retailers = new ArrayList<>();
+  private List<String> methods = new ArrayList<>();
 
   /**
    * Gets name.
@@ -183,24 +171,6 @@ public class WishDTO {
    */
   public void setDeadline(LocalDateTime deadline) {
     this.deadline = deadline;
-  }
-
-  /**
-   * Gets creation date.
-   *
-   * @return the creation date
-   */
-  public LocalDateTime getCreationDate() {
-    return creationDate;
-  }
-
-  /**
-   * Sets creation date.
-   *
-   * @param creationDate the creation date
-   */
-  public void setCreationDate(LocalDateTime creationDate) {
-    this.creationDate = creationDate;
   }
 
   /**

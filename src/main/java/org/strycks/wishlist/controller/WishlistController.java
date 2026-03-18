@@ -1,5 +1,6 @@
 package org.strycks.wishlist.controller;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,9 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.strycks.wishlist.dto.WishRequestDTO;
+import org.strycks.wishlist.dto.WishResponseDTO;
 import org.strycks.wishlist.model.Wish;
 import org.strycks.wishlist.repository.UserRepository;
 import org.strycks.wishlist.repository.WishRepository;
+import org.strycks.wishlist.service.WishlistService;
 
 /**
  * The type Wishlist controller.
@@ -22,16 +26,19 @@ import org.strycks.wishlist.repository.WishRepository;
 public class WishlistController {
   private final WishRepository wishRepository;
   private final UserRepository userRepository;
+  private final WishlistService wishlistService;
 
   /**
    * Instantiates a new Wishlist controller.
    *
-   * @param wishRepository the wish repository
-   * @param userRepository the user repository
+   * @param wishRepository  the wish repository
+   * @param userRepository  the user repository
+   * @param wishlistService the wishlist service
    */
-  public WishlistController(WishRepository wishRepository, UserRepository userRepository) {
+  public WishlistController(WishRepository wishRepository, UserRepository userRepository, WishlistService wishlistService) {
     this.wishRepository = wishRepository;
     this.userRepository = userRepository;
+    this.wishlistService = wishlistService;
   }
 
   /**
@@ -40,8 +47,8 @@ public class WishlistController {
    * @return the all wishes
    */
   @GetMapping
-  public List<Wish> getAllWishes() {
-    return wishRepository.findAll();
+  public List<WishResponseDTO> getAllWishes() {
+    return wishlistService.getAllWishes();
   }
 
   /**
@@ -51,18 +58,19 @@ public class WishlistController {
    * @return the wish
    */
   @GetMapping("/{id}")
-  public Optional<Wish> getWish(@PathVariable Long id) {
-    return wishRepository.findById(id);
+  public WishResponseDTO getWish(@PathVariable Long id) {
+    return wishlistService.getWish(id);
   }
 
+
   /**
-   * Add wish wish.
+   * Add wish.
    *
-   * @param wish the wish
-   * @return the wish
+   * @param request the request
+   * @return the wish response dto
    */
   @PostMapping
-  public Wish addWish(@RequestBody Wish wish) {
-    return wishRepository.save(wish);
+  public WishResponseDTO addWish(@RequestBody @Valid WishRequestDTO request) {
+    return wishlistService.createWish(request);
   }
 }

@@ -4,7 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The type Wish request dto.
@@ -23,11 +24,11 @@ public class WishRequestDTO {
   @NotBlank
   private String status;
   private LocalDateTime deadline;
-  private List<String> tags = new ArrayList<>();
-  private List<String> conditions = new ArrayList<>();
-  private List<String> urls = new ArrayList<>();
-  private List<String> retailers = new ArrayList<>();
-  private List<String> methods = new ArrayList<>();
+  private Set<String> tags = new HashSet<>();
+  private Set<String> conditions = new HashSet<>();
+  private Set<String> urls = new HashSet<>();
+  private Set<String> retailers = new HashSet<>();
+  private Set<String> methods = new HashSet<>();
 
   /**
    * Gets name.
@@ -178,7 +179,7 @@ public class WishRequestDTO {
    *
    * @return the tags
    */
-  public List<String> getTags() {
+  public Set<String> getTags() {
     return tags;
   }
 
@@ -187,7 +188,7 @@ public class WishRequestDTO {
    *
    * @param tags the tags
    */
-  public void setTags(List<String> tags) {
+  public void setTags(Set<String> tags) {
     this.tags = tags;
   }
 
@@ -196,7 +197,7 @@ public class WishRequestDTO {
    *
    * @return the conditions
    */
-  public List<String> getConditions() {
+  public Set<String> getConditions() {
     return conditions;
   }
 
@@ -205,7 +206,7 @@ public class WishRequestDTO {
    *
    * @param conditions the conditions
    */
-  public void setConditions(List<String> conditions) {
+  public void setConditions(Set<String> conditions) {
     this.conditions = conditions;
   }
 
@@ -214,7 +215,7 @@ public class WishRequestDTO {
    *
    * @return the urls
    */
-  public List<String> getUrls() {
+  public Set<String> getUrls() {
     return urls;
   }
 
@@ -223,7 +224,7 @@ public class WishRequestDTO {
    *
    * @param urls the urls
    */
-  public void setUrls(List<String> urls) {
+  public void setUrls(Set<String> urls) {
     this.urls = urls;
   }
 
@@ -232,7 +233,7 @@ public class WishRequestDTO {
    *
    * @return the retailers
    */
-  public List<String> getRetailers() {
+  public Set<String> getRetailers() {
     return retailers;
   }
 
@@ -241,7 +242,7 @@ public class WishRequestDTO {
    *
    * @param retailers the retailers
    */
-  public void setRetailers(List<String> retailers) {
+  public void setRetailers(Set<String> retailers) {
     this.retailers = retailers;
   }
 
@@ -250,7 +251,7 @@ public class WishRequestDTO {
    *
    * @return the methods
    */
-  public List<String> getMethods() {
+  public Set<String> getMethods() {
     return methods;
   }
 
@@ -259,7 +260,7 @@ public class WishRequestDTO {
    *
    * @param methods the methods
    */
-  public void setMethods(List<String> methods) {
+  public void setMethods(Set<String> methods) {
     this.methods = methods;
   }
 }

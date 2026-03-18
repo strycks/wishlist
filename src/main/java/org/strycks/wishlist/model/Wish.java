@@ -143,7 +143,7 @@ public class Wish {
   public void removeTag(Tag tag) {
     this.tags.remove(tag);
     tag.getWishes().remove(this);
-    System.err.println(tag.getWishes().size() + " " + tags.size());
+    // System.err.println(tag.getWishes().size() + " " + tags.size());
   }
 
   /**
@@ -154,7 +154,7 @@ public class Wish {
   public void addTag(Tag tag) {
     this.tags.add(tag);
     tag.getWishes().add(this);
-    System.err.println(tag.getWishes().size() + " " + tags.size());
+    // System.err.println(tag.getWishes().size() + " " + tags.size());
   }
 
   /**

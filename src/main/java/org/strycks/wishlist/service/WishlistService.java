@@ -25,11 +25,19 @@ import org.strycks.wishlist.repository.WishRepository;
  */
 @Service
 public class WishlistService {
-  @Autowired
-  private WishRepository wishRepository;
+  private final WishRepository wishRepository;
+  private final TagRepository tagRepository;
 
-  @Autowired
-  private TagRepository tagRepository;
+  /**
+   * Instantiates a new Wishlist service.
+   *
+   * @param wishRepository the wish repository
+   * @param tagRepository  the tag repository
+   */
+  public WishlistService(WishRepository wishRepository, TagRepository tagRepository) {
+    this.wishRepository = wishRepository;
+    this.tagRepository = tagRepository;
+  }
 
   /**
    * Create wish wish response dto.
@@ -52,7 +60,8 @@ public class WishlistService {
    */
   public WishResponseDTO getWish(Long id) {
     Optional<Wish> wish = wishRepository.findById(id);
-    return wish.map(this::mapToResponse).orElseThrow(() -> new OpenApiResourceNotFoundException("Resource not found"));
+    return wish.map(this::mapToResponse)
+               .orElseThrow(() -> new OpenApiResourceNotFoundException("Resource not found"));
   }
 
   /**
@@ -138,23 +147,5 @@ public class WishlistService {
     dto.setRetailers(wish.getRetailers().stream().toList());
 
     return dto;
-  }
-
-  /**
-   * Sets wish repository.
-   *
-   * @param wishRepository the wish repository
-   */
-  public void setWishRepository(WishRepository wishRepository) {
-    this.wishRepository = wishRepository;
-  }
-
-  /**
-   * Sets tag repository.
-   *
-   * @param tagRepository the tag repository
-   */
-  public void setTagRepository(TagRepository tagRepository) {
-    this.tagRepository = tagRepository;
   }
 }

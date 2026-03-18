@@ -24,20 +24,14 @@ import org.strycks.wishlist.service.WishlistService;
 @RestController
 @RequestMapping("/api/wishlist")
 public class WishlistController {
-  private final WishRepository wishRepository;
-  private final UserRepository userRepository;
   private final WishlistService wishlistService;
 
   /**
    * Instantiates a new Wishlist controller.
    *
-   * @param wishRepository  the wish repository
-   * @param userRepository  the user repository
    * @param wishlistService the wishlist service
    */
-  public WishlistController(WishRepository wishRepository, UserRepository userRepository, WishlistService wishlistService) {
-    this.wishRepository = wishRepository;
-    this.userRepository = userRepository;
+  public WishlistController(WishlistService wishlistService) {
     this.wishlistService = wishlistService;
   }
 

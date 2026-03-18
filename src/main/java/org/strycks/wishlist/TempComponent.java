@@ -1,19 +1,9 @@
 package org.strycks.wishlist;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
-import java.util.Set;
-import javax.swing.text.html.HTML;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import org.strycks.wishlist.controller.WishlistController;
-import org.strycks.wishlist.model.Tag;
 import org.strycks.wishlist.model.User;
-import org.strycks.wishlist.model.Wish;
-import org.strycks.wishlist.model.WishMethod;
 import org.strycks.wishlist.repository.TagRepository;
 import org.strycks.wishlist.repository.UserRepository;
 import org.strycks.wishlist.repository.WishRepository;
@@ -24,37 +14,20 @@ import org.strycks.wishlist.repository.WishRepository;
 @Component
 public class TempComponent implements ApplicationRunner {
 
-  private WishRepository repository;
-  private TagRepository tagRepository;
-  private UserRepository userRepository;
+  private final WishRepository wishRepository;
+  private final TagRepository tagRepository;
+  private final UserRepository userRepository;
 
   /**
-   * Sets repository.
+   * Instantiates a new Temp component.
    *
-   * @param repository the repository
-   */
-  @Autowired
-  public void setRepository(WishRepository repository) {
-    this.repository = repository;
-  }
-
-  /**
-   * Sets tag repository.
-   *
-   * @param tagRepository the tag repository
-   */
-  @Autowired
-  public void setTagRepository(TagRepository tagRepository) {
-    this.tagRepository = tagRepository;
-  }
-
-  /**
-   * Sets user repository.
-   *
+   * @param wishRepository     the repository
+   * @param tagRepository  the tag repository
    * @param userRepository the user repository
    */
-  @Autowired
-  public void setUserRepository(UserRepository userRepository) {
+  public TempComponent(WishRepository wishRepository, TagRepository tagRepository, UserRepository userRepository) {
+    this.wishRepository = wishRepository;
+    this.tagRepository = tagRepository;
     this.userRepository = userRepository;
   }
 

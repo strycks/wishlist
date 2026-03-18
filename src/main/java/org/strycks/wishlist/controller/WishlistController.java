@@ -3,6 +3,7 @@ package org.strycks.wishlist.controller;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,8 +42,8 @@ public class WishlistController {
    * @return the all wishes
    */
   @GetMapping
-  public List<WishResponseDTO> getAllWishes() {
-    return wishlistService.getAllWishes();
+  public ResponseEntity<List<WishResponseDTO>> getAllWishes() {
+    return ResponseEntity.ok(wishlistService.getAllWishes());
   }
 
   /**
@@ -52,8 +53,8 @@ public class WishlistController {
    * @return the wish
    */
   @GetMapping("/{id}")
-  public WishResponseDTO getWish(@PathVariable Long id) {
-    return wishlistService.getWish(id);
+  public ResponseEntity<WishResponseDTO> getWish(@PathVariable Long id) {
+    return ResponseEntity.ok(wishlistService.getWish(id));
   }
 
 
@@ -64,7 +65,7 @@ public class WishlistController {
    * @return the wish response dto
    */
   @PostMapping
-  public WishResponseDTO addWish(@RequestBody @Valid WishRequestDTO request) {
-    return wishlistService.createWish(request);
+  public ResponseEntity<WishResponseDTO> addWish(@RequestBody @Valid WishRequestDTO request) {
+    return ResponseEntity.ok(wishlistService.createWish(request));
   }
 }

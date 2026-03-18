@@ -48,6 +48,7 @@ public class WebSecurityConfig {
             auth -> auth
                 // .requestMatchers("/api/wishlist").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/error/**").permitAll()
                 .anyRequest().authenticated())
         .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

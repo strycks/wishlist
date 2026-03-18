@@ -6,6 +6,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import org.strycks.wishlist.model.WishCondition;
+import org.strycks.wishlist.model.WishMethod;
+import org.strycks.wishlist.model.WishStatus;
+import org.strycks.wishlist.validator.ValidEnum;
 
 /**
  * The type Wish request dto.
@@ -22,13 +26,21 @@ public class WishRequestDTO {
   private Integer quantity;
   private String about;
   @NotBlank
+  @ValidEnum(enumClass = WishStatus.class,
+      message = "Status must be PENDING, PROCESSING or COMPLETED")
   private String status;
   private LocalDateTime deadline;
   private Set<String> tags = new HashSet<>();
-  private Set<String> conditions = new HashSet<>();
+  private Set<@ValidEnum(
+      enumClass = WishCondition.class,
+      message = "Method must be NEW, USED, UNUSED or REFURBISHED"
+  ) String> conditions = new HashSet<>();
   private Set<String> urls = new HashSet<>();
   private Set<String> retailers = new HashSet<>();
-  private Set<String> methods = new HashSet<>();
+  private Set<@ValidEnum(
+      enumClass = WishMethod.class,
+      message = "Method must be ONLINE, OFFLINE or ORDER"
+  ) String> methods = new HashSet<>();
 
   /**
    * Gets name.

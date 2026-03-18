@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.strycks.wishlist.dto.WishRequestDTO;
 import org.strycks.wishlist.dto.WishResponseDTO;
+import org.strycks.wishlist.handler.NotFoundException;
 import org.strycks.wishlist.model.Tag;
 import org.strycks.wishlist.model.Wish;
 import org.strycks.wishlist.model.WishCondition;
@@ -40,7 +41,7 @@ public class WishlistService {
   }
 
   /**
-   * Create wish wish response dto.
+   * Create wish response dto.
    *
    * @param request the request
    * @return the wish response dto
@@ -61,7 +62,7 @@ public class WishlistService {
   public WishResponseDTO getWish(Long id) {
     Optional<Wish> wish = wishRepository.findById(id);
     return wish.map(this::mapToResponse)
-               .orElseThrow(() -> new OpenApiResourceNotFoundException("Resource not found"));
+               .orElseThrow(() -> new NotFoundException("Resource Not Found"));
   }
 
   /**
@@ -93,14 +94,16 @@ public class WishlistService {
     wish.setMeter(dto.getMeter());
     wish.setQuantity(dto.getQuantity());
     wish.setAbout(dto.getAbout());
-    wish.setStatus(WishStatus.valueOf(dto.getStatus()));
     wish.setDeadline(dto.getDeadline());
+    wish.setStatus(WishStatus.valueOf(dto.getStatus()));
 
     wish.setRetailers(new HashSet<>(dto.getRetailers()));
     wish.setUrls(new HashSet<>(dto.getUrls()));
     wish.setConditions(dto.getConditions().stream()
+        .filter(cond -> !cond.isBlank())
         .map(WishCondition::valueOf).collect(Collectors.toSet()));
     wish.setMethods(dto.getMethods().stream()
+        .filter(cond -> !cond.isBlank())
         .map(WishMethod::valueOf).collect(Collectors.toSet()));
 
     List<Tag> createdTags = tagRepository.findByNameIn(dto.getTags());

@@ -1,7 +1,7 @@
 package org.strycks.wishlist.auth;
 
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,17 +11,9 @@ import org.strycks.wishlist.repository.UserRepository;
 
 /** The type My user details service. */
 @Service
+@AllArgsConstructor
 public class MyUserDetailsService implements UserDetailsService {
   private final UserRepository userRepository;
-
-  /**
-   * Instantiates a new My user details service.
-   *
-   * @param userRepository the user repository
-   */
-  public MyUserDetailsService(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

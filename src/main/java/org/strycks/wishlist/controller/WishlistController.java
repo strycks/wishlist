@@ -2,6 +2,7 @@ package org.strycks.wishlist.controller;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,17 +19,9 @@ import org.strycks.wishlist.service.WishlistService;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/wishlist")
+@AllArgsConstructor
 public class WishlistController {
   private final WishlistService wishlistService;
-
-  /**
-   * Instantiates a new Wishlist controller.
-   *
-   * @param wishlistService the wishlist service
-   */
-  public WishlistController(WishlistService wishlistService) {
-    this.wishlistService = wishlistService;
-  }
 
   /**
    * Gets all wishes.

@@ -11,10 +11,16 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /** The type Tag. */
 @Entity
 @Table(name = "tags")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Tag {
   @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   @Id
@@ -27,61 +33,4 @@ public class Tag {
   @JsonIgnore
   @ManyToMany(mappedBy = "tags")
   private Set<Wish> wishes = new HashSet<>();
-
-  /** Instantiates a new Tag. */
-  public Tag() {}
-
-  /**
-   * Gets id.
-   *
-   * @return the id
-   */
-  public Long getId() {
-    return id;
-  }
-
-  /**
-   * Sets id.
-   *
-   * @param id the id
-   */
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  /**
-   * Gets name.
-   *
-   * @return the name
-   */
-  public String getName() {
-    return name;
-  }
-
-  /**
-   * Sets name.
-   *
-   * @param name the name
-   */
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  /**
-   * Gets wishes.
-   *
-   * @return the wishes
-   */
-  public Set<Wish> getWishes() {
-    return wishes;
-  }
-
-  /**
-   * Sets wishes.
-   *
-   * @param wishes the wishes
-   */
-  public void setWishes(Set<Wish> wishes) {
-    this.wishes = wishes;
-  }
 }

@@ -2,6 +2,7 @@ package org.strycks.wishlist.auth;
 
 import java.util.Arrays;
 import java.util.Collections;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,17 +23,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
  */
 @EnableWebSecurity
 @Configuration
+@AllArgsConstructor
 public class WebSecurityConfig {
   private final JwtFilter jwtFilter;
-
-  /**
-   * Instantiates a new Web security config.
-   *
-   * @param jwtFilter the jwt filter
-   */
-  public WebSecurityConfig(JwtFilter jwtFilter) {
-    this.jwtFilter = jwtFilter;
-  }
 
   /**
    * Security filter chain security filter chain.

@@ -1,5 +1,6 @@
 package org.strycks.wishlist;
 
+import lombok.AllArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -11,24 +12,12 @@ import org.strycks.wishlist.repository.WishRepository;
  * The type Temp component.
  */
 @Component
+@AllArgsConstructor
 public class TempComponent implements ApplicationRunner {
 
   private final WishRepository wishRepository;
   private final TagRepository tagRepository;
   private final UserRepository userRepository;
-
-  /**
-   * Instantiates a new Temp component.
-   *
-   * @param wishRepository the repository
-   * @param tagRepository  the tag repository
-   * @param userRepository the user repository
-   */
-  public TempComponent(WishRepository wishRepository, TagRepository tagRepository, UserRepository userRepository) {
-    this.wishRepository = wishRepository;
-    this.tagRepository = tagRepository;
-    this.userRepository = userRepository;
-  }
 
   @Override
   public void run(ApplicationArguments args) throws Exception {

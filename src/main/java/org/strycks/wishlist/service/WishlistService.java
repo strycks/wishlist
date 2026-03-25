@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.strycks.wishlist.dto.WishRequestDTO;
@@ -21,21 +22,11 @@ import org.strycks.wishlist.repository.WishRepository;
 /**
  * The type Wishlist service.
  */
+@AllArgsConstructor
 @Service
 public class WishlistService {
   private final WishRepository wishRepository;
   private final TagRepository tagRepository;
-
-  /**
-   * Instantiates a new Wishlist service.
-   *
-   * @param wishRepository the wish repository
-   * @param tagRepository  the tag repository
-   */
-  public WishlistService(WishRepository wishRepository, TagRepository tagRepository) {
-    this.wishRepository = wishRepository;
-    this.tagRepository = tagRepository;
-  }
 
   /**
    * Create wish response dto.

@@ -1,5 +1,6 @@
 package org.strycks.wishlist.auth;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,22 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/auth")
+@AllArgsConstructor
 public class AuthController {
   private final AuthenticationManager authenticationManager;
   private final JwtTokenProvider jwtTokenProvider;
-
-  /**
-   * Instantiates a new Auth controller.
-   *
-   * @param authenticationManager the authentication manager
-   * @param jwtTokenProvider      the jwt token provider
-   */
-  public AuthController(
-      AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider
-  ) {
-    this.authenticationManager = authenticationManager;
-    this.jwtTokenProvider = jwtTokenProvider;
-  }
 
   /**
    * Login response entity.

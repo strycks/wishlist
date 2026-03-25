@@ -1,19 +1,11 @@
 package org.strycks.wishlist.model;
 
-/**
- * The enum Wish status.
- */
+/** The enum Wish status. */
 public enum WishStatus {
-  /**
-   * Pending wish status.
-   */
+  /** Pending wish status. */
   PENDING,
-  /**
-   * Processing wish status.
-   */
+  /** Processing wish status. */
   PROCESSING,
-  /**
-   * Completed wish status.
-   */
+  /** Completed wish status. */
   COMPLETED
 }

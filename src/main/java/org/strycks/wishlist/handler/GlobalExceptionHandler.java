@@ -2,11 +2,10 @@ package org.strycks.wishlist.handler;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.coyote.Response;
-import org.jspecify.annotations.NonNull;
-import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -45,5 +44,19 @@ public class GlobalExceptionHandler {
     exception.getBindingResult().getAllErrors()
         .forEach(err -> errors.put(((FieldError) err).getField(), err.getDefaultMessage()));
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+  }
+
+  /**
+   * Handle bad credentials response entity.
+   *
+   * @param exception the exception
+   * @return the response entity
+   */
+  @ExceptionHandler({BadCredentialsException.class, UsernameNotFoundException.class})
+  public ResponseEntity<ErrorResponseDTO> handleBadCredentials(
+      Exception exception) {
+    ErrorResponseDTO err =
+        new ErrorResponseDTO("Incorrect credentials", HttpStatus.FORBIDDEN.value());
+    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
   }
 }

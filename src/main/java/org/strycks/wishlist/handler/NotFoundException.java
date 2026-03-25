@@ -1,8 +1,6 @@
 package org.strycks.wishlist.handler;
 
-/**
- * The type Not found exception.
- */
+/** The type Not found exception. */
 public class NotFoundException extends RuntimeException {
   /**
    * Instantiates a new Not found exception.

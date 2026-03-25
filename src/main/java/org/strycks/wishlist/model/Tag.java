@@ -12,9 +12,7 @@ import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * The type Tag.
- */
+/** The type Tag. */
 @Entity
 @Table(name = "tags")
 public class Tag {
@@ -30,11 +28,8 @@ public class Tag {
   @ManyToMany(mappedBy = "tags")
   private Set<Wish> wishes = new HashSet<>();
 
-  /**
-   * Instantiates a new Tag.
-   */
-  public Tag() {
-  }
+  /** Instantiates a new Tag. */
+  public Tag() {}
 
   /**
    * Gets id.

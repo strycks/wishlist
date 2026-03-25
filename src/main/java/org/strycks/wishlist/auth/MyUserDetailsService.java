@@ -9,13 +9,19 @@ import org.springframework.stereotype.Service;
 import org.strycks.wishlist.model.User;
 import org.strycks.wishlist.repository.UserRepository;
 
-/**
- * The type My user details service.
- */
+/** The type My user details service. */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
+
+  /**
+   * Instantiates a new My user details service.
+   *
+   * @param userRepository the user repository
+   */
+  public MyUserDetailsService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

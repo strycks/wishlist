@@ -1,23 +1,13 @@
 package org.strycks.wishlist.model;
 
-/**
- * The enum Wish condition.
- */
+/** The enum Wish condition. */
 public enum WishCondition {
-  /**
-   * New wish condition.
-   */
+  /** New wish condition. */
   NEW,
-  /**
-   * Used wish condition.
-   */
+  /** Used wish condition. */
   USED,
-  /**
-   * Unused wish condition.
-   */
+  /** Unused wish condition. */
   UNUSED,
-  /**
-   * Refurbished wish condition.
-   */
+  /** Refurbished wish condition. */
   REFURBISHED
 }

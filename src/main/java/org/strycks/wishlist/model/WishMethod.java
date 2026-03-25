@@ -1,19 +1,11 @@
 package org.strycks.wishlist.model;
 
-/**
- * The enum Wish method.
- */
+/** The enum Wish method. */
 public enum WishMethod {
-  /**
-   * Online wish method.
-   */
+  /** Online wish method. */
   ONLINE,
-  /**
-   * Offline wish method.
-   */
+  /** Offline wish method. */
   OFFLINE,
-  /**
-   * Order wish method.
-   */
+  /** Order wish method. */
   ORDER
 }

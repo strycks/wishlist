@@ -6,27 +6,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The type Wish dto.
- */
+/** The type Wish dto. */
 public class WishResponseDTO {
-  @NotNull
-  private Long id;
-  @NotBlank
-  private String name;
-  @NotNull
-  private Long price;
+  @NotNull private Long id;
+  @NotBlank private String name;
+  @NotNull private Long price;
   private String note;
-  @NotNull
-  private Integer meter;
-  @NotNull
-  private Integer quantity;
+  @NotNull private Integer meter;
+  @NotNull private Integer quantity;
   private String about;
-  @NotBlank
-  private String status;
+  @NotBlank private String status;
   private LocalDateTime deadline;
-  @NotNull
-  private LocalDateTime creationDate;
+  @NotNull private LocalDateTime creationDate;
   private List<String> tags = new ArrayList<>();
   private List<String> conditions = new ArrayList<>();
   private List<String> urls = new ArrayList<>();

@@ -1,13 +1,10 @@
 package org.strycks.wishlist.service;
 
-import jakarta.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.springdoc.api.OpenApiResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.strycks.wishlist.dto.WishRequestDTO;

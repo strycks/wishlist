@@ -5,15 +5,14 @@ import jakarta.validation.ConstraintValidatorContext;
 import java.util.List;
 import java.util.stream.Stream;
 
-/**
- * The type Enum validator.
- */
+/** The type Enum validator. */
 public class EnumValidator implements ConstraintValidator<ValidEnum, String> {
   private List<String> validValues;
 
   @Override
   public void initialize(ValidEnum constraintAnnotation) {
-    validValues = Stream.of(constraintAnnotation.enumClass().getEnumConstants()).map(Enum::name).toList();
+    validValues =
+        Stream.of(constraintAnnotation.enumClass().getEnumConstants()).map(Enum::name).toList();
   }
 
   @Override

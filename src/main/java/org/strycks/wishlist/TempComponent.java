@@ -3,7 +3,6 @@ package org.strycks.wishlist;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import org.strycks.wishlist.model.User;
 import org.strycks.wishlist.repository.TagRepository;
 import org.strycks.wishlist.repository.UserRepository;
 import org.strycks.wishlist.repository.WishRepository;
@@ -21,7 +20,7 @@ public class TempComponent implements ApplicationRunner {
   /**
    * Instantiates a new Temp component.
    *
-   * @param wishRepository     the repository
+   * @param wishRepository the repository
    * @param tagRepository  the tag repository
    * @param userRepository the user repository
    */

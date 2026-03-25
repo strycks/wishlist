@@ -2,7 +2,6 @@ package org.strycks.wishlist.controller;
 
 import jakarta.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.strycks.wishlist.dto.WishRequestDTO;
 import org.strycks.wishlist.dto.WishResponseDTO;
-import org.strycks.wishlist.model.Wish;
-import org.strycks.wishlist.repository.UserRepository;
-import org.strycks.wishlist.repository.WishRepository;
 import org.strycks.wishlist.service.WishlistService;
 
-/**
- * The type Wishlist controller.
- */
+/** The type Wishlist controller. */
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/wishlist")
@@ -56,7 +50,6 @@ public class WishlistController {
   public ResponseEntity<WishResponseDTO> getWish(@PathVariable Long id) {
     return ResponseEntity.ok(wishlistService.getWish(id));
   }
-
 
   /**
    * Add wish.

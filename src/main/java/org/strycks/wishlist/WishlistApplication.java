@@ -3,9 +3,7 @@ package org.strycks.wishlist;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * The type Wishlist application.
- */
+/** The type Wishlist application. */
 @SpringBootApplication
 public class WishlistApplication {
   /**

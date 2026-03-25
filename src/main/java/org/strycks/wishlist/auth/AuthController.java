@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * The type Auth controller.
- */
+/** The type Auth controller. */
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor
@@ -33,17 +31,12 @@ public class AuthController {
     return ResponseEntity.ok(token);
   }
 
-  /**
-   * The type Auth request.
-   */
+  /** The type Auth request. */
   public static class AuthRequest {
-    /**
-     * The Username.
-     */
+    /** The Username. */
     public String username;
-    /**
-     * The Password.
-     */
+
+    /** The Password. */
     public String password;
   }
 }

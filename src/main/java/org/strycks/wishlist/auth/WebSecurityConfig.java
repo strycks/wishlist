@@ -18,9 +18,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-/**
- * The type Web security config.
- */
+/** The type Web security config. */
 @EnableWebSecurity
 @Configuration
 @AllArgsConstructor
@@ -35,14 +33,19 @@ public class WebSecurityConfig {
    */
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
-    httpSecurity.csrf(csrf -> csrf.disable())
+    httpSecurity
+        .csrf(csrf -> csrf.disable())
         .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .authorizeHttpRequests(
-            auth -> auth
-                // .requestMatchers("/api/wishlist").permitAll()
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/error/**").permitAll()
-                .anyRequest().authenticated())
+            auth ->
+                auth
+                    // .requestMatchers("/api/wishlist").permitAll()
+                    .requestMatchers("/api/auth/**")
+                    .permitAll()
+                    .requestMatchers("/error/**")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated())
         .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     return httpSecurity.build();

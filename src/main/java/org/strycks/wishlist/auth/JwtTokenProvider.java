@@ -7,9 +7,7 @@ import java.security.Key;
 import java.util.Date;
 import org.springframework.stereotype.Component;
 
-/**
- * The type Jwt token provider.
- */
+/** The type Jwt token provider. */
 @Component
 public class JwtTokenProvider {
   private final String JWT_SECRET = "tXHzZyrglpWqIgfONgcI+gsoCnXKhFFRsFsLtfx0JqU=";
@@ -41,8 +39,12 @@ public class JwtTokenProvider {
    * @return the string
    */
   public String extractUsername(String token) {
-    return Jwts.parser().setSigningKey(getSigningKey()).build()
-        .parseSignedClaims(token).getPayload().getSubject();
+    return Jwts.parser()
+        .setSigningKey(getSigningKey())
+        .build()
+        .parseSignedClaims(token)
+        .getPayload()
+        .getSubject();
   }
 
   /**

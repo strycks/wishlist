@@ -19,9 +19,7 @@ import org.strycks.wishlist.model.WishStatus;
 import org.strycks.wishlist.repository.TagRepository;
 import org.strycks.wishlist.repository.WishRepository;
 
-/**
- * The type Wishlist service.
- */
+/** The type Wishlist service. */
 @AllArgsConstructor
 @Service
 public class WishlistService {
@@ -47,10 +45,10 @@ public class WishlistService {
    * @param id the id
    * @return the wish
    */
-  public WishResponseDTO getWish(Long id) {
+  public WishResponseDTO getWish(long id) {
     Optional<Wish> wish = wishRepository.findById(id);
     return wish.map(this::mapToResponse)
-               .orElseThrow(() -> new NotFoundException("Resource Not Found"));
+        .orElseThrow(() -> new NotFoundException("Resource Not Found"));
   }
 
   /**
@@ -61,6 +59,20 @@ public class WishlistService {
   public List<WishResponseDTO> getAllWishes() {
     List<Wish> wishes = wishRepository.findAll();
     return wishes.stream().map(this::mapToResponse).toList();
+  }
+
+  /** Delete a wish. */
+  @Transactional
+  public void deleteWish(long id) {
+    wishRepository.deleteById(id);
+  }
+
+  /** Replace a wish. */
+  @Transactional
+  public WishResponseDTO replaceWish(long id, WishRequestDTO request) {
+    Wish wish = wishRepository.findById(id).orElseThrow(() -> new NotFoundException("Resource Not Found"));
+    wish.replaceWith(mapToWish(request));
+    return mapToResponse(wish);
   }
 
   /**
@@ -87,25 +99,29 @@ public class WishlistService {
 
     wish.setRetailers(new HashSet<>(dto.getRetailers()));
     wish.setUrls(new HashSet<>(dto.getUrls()));
-    wish.setConditions(dto.getConditions().stream()
-        .filter(cond -> !cond.isBlank())
-        .map(WishCondition::valueOf).collect(Collectors.toSet()));
-    wish.setMethods(dto.getMethods().stream()
-        .filter(cond -> !cond.isBlank())
-        .map(WishMethod::valueOf).collect(Collectors.toSet()));
+    wish.setConditions(
+        dto.getConditions().stream()
+            .filter(cond -> !cond.isBlank())
+            .map(WishCondition::valueOf)
+            .collect(Collectors.toSet()));
+    wish.setMethods(
+        dto.getMethods().stream()
+            .filter(cond -> !cond.isBlank())
+            .map(WishMethod::valueOf)
+            .collect(Collectors.toSet()));
 
     List<Tag> createdTags = tagRepository.findByNameIn(dto.getTags());
-    Set<String> createdNames = createdTags.stream()
-        .map(Tag::getName).collect(Collectors.toSet());
+    Set<String> createdNames = createdTags.stream().map(Tag::getName).collect(Collectors.toSet());
     createdTags.forEach(wish::addTag);
     dto.getTags().stream()
         .filter(tagName -> !createdNames.contains(tagName))
-        .forEach(tagName -> {
-          Tag tmp = new Tag();
-          tmp.setName(tagName);
-          tagRepository.save(tmp);
-          wish.addTag(tmp);
-        });
+        .forEach(
+            tagName -> {
+              Tag tmp = new Tag();
+              tmp.setName(tagName);
+              tagRepository.save(tmp);
+              wish.addTag(tmp);
+            });
     return wish;
   }
 

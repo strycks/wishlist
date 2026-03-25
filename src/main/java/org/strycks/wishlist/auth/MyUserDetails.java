@@ -10,9 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.strycks.wishlist.model.User;
 
-/**
- * The type My user details.
- */
+/** The type My user details. */
 @Getter
 @Setter
 public class MyUserDetails implements UserDetails {

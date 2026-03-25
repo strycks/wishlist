@@ -11,9 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * The type User.
- */
+/** The type User. */
 @Entity
 @Table(name = "users")
 @Getter

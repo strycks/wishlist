@@ -3,11 +3,14 @@ package org.strycks.wishlist.controller;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,6 +55,31 @@ public class WishlistController {
    */
   @PostMapping
   public ResponseEntity<WishResponseDTO> addWish(@RequestBody @Valid WishRequestDTO request) {
-    return ResponseEntity.ok(wishlistService.createWish(request));
+    return ResponseEntity.status(HttpStatus.CREATED).body(wishlistService.createWish(request));
+  }
+
+  /**
+   * Delete wish response entity.
+   *
+   * @param id the id
+   * @return the response entity
+   */
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteWish(@PathVariable Long id) {
+    wishlistService.deleteWish(id);
+    return ResponseEntity.noContent().build();
+  }
+
+  /**
+   * Replace wish response entity.
+   *
+   * @param id the id
+   * @param request the request
+   * @return the response entity
+   */
+  @PutMapping("/{id}")
+  public ResponseEntity<WishResponseDTO> replaceWish(
+      @PathVariable Long id, @RequestBody @Valid WishRequestDTO request) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(wishlistService.replaceWish(id, request));
   }
 }

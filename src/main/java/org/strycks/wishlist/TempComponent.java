@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.strycks.wishlist.model.User;
 import org.strycks.wishlist.repository.TagRepository;
 import org.strycks.wishlist.repository.UserRepository;
 import org.strycks.wishlist.repository.WishRepository;
 
-/**
- * The type Temp component.
- */
+/** The type Temp component. */
 @Component
 @AllArgsConstructor
 public class TempComponent implements ApplicationRunner {
@@ -45,10 +44,10 @@ public class TempComponent implements ApplicationRunner {
     // user.setName("deewlynn");
     // user.setPassword("$2a$12$tEhXJo/yzQFGl9MhXY5KjuCu0QyuL0mXS/prZu7EcmWcicElYg1ZW");
     // userRepository.save(user);
-    // User user2 = new User();
-    // user2.setName("admin");
-    // user2.setPassword("$2a$12$zRxq.e.3YbrE3F.xsyom7.IxZ/DCL6oYYzNn/GQwrPzG03MhoA4Tq");
-    // userRepository.save(user2);
+    User user2 = new User();
+    user2.setName("admin");
+    user2.setPassword("$2a$12$zRxq.e.3YbrE3F.xsyom7.IxZ/DCL6oYYzNn/GQwrPzG03MhoA4Tq");
+    userRepository.save(user2);
 
     // for (Wish x : repository.findAll()) {
     //   System.out.println(x.getName());

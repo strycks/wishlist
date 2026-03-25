@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.strycks.wishlist.dto.ErrorResponseDTO;
 
-/**
- * The type Global exception handler.
- */
+/** The type Global exception handler. */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
   /**
@@ -24,8 +22,7 @@ public class GlobalExceptionHandler {
    * @return the response entity
    */
   @ExceptionHandler(NotFoundException.class)
-  public ResponseEntity<ErrorResponseDTO> handleResourceNotFound(
-      NotFoundException exception) {
+  public ResponseEntity<ErrorResponseDTO> handleResourceNotFound(NotFoundException exception) {
     ErrorResponseDTO error =
         new ErrorResponseDTO(exception.getMessage(), HttpStatus.NOT_FOUND.value());
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
@@ -41,7 +38,9 @@ public class GlobalExceptionHandler {
   public ResponseEntity<Map<String, String>> handleValidationException(
       MethodArgumentNotValidException exception) {
     Map<String, String> errors = new HashMap<>();
-    exception.getBindingResult().getAllErrors()
+    exception
+        .getBindingResult()
+        .getAllErrors()
         .forEach(err -> errors.put(((FieldError) err).getField(), err.getDefaultMessage()));
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
   }
@@ -53,8 +52,7 @@ public class GlobalExceptionHandler {
    * @return the response entity
    */
   @ExceptionHandler({BadCredentialsException.class, UsernameNotFoundException.class})
-  public ResponseEntity<ErrorResponseDTO> handleBadCredentials(
-      Exception exception) {
+  public ResponseEntity<ErrorResponseDTO> handleBadCredentials(Exception exception) {
     ErrorResponseDTO err =
         new ErrorResponseDTO("Incorrect credentials", HttpStatus.FORBIDDEN.value());
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);

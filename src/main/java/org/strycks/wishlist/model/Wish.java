@@ -23,9 +23,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * The type Wish.
- */
+/** The type Wish. */
 @Entity
 @Table(name = "wishes")
 @NoArgsConstructor
@@ -69,43 +67,30 @@ public class Wish {
   @JoinTable(
       name = "wish_tags",
       joinColumns = @JoinColumn(name = "wish_id"),
-      inverseJoinColumns = @JoinColumn(name = "tag_id")
-  )
+      inverseJoinColumns = @JoinColumn(name = "tag_id"))
   private Set<Tag> tags = new HashSet<>();
 
   @ElementCollection
   @Enumerated(EnumType.STRING)
-  @CollectionTable(
-      name = "wish_conditions",
-      joinColumns = @JoinColumn(name = "wish_id")
-  )
+  @CollectionTable(name = "wish_conditions", joinColumns = @JoinColumn(name = "wish_id"))
   @Column(name = "`condition`")
   private Set<WishCondition> conditions = new HashSet<>(List.of(WishCondition.NEW));
 
   // multivalued attribute, create an immediate table named "wish_urls"
   // has two columns, "wish_id" referencing "id" and "url".
   @ElementCollection
-  @CollectionTable(
-      name = "wish_urls",
-      joinColumns = @JoinColumn(name = "wish_id")
-  )
+  @CollectionTable(name = "wish_urls", joinColumns = @JoinColumn(name = "wish_id"))
   @Column(name = "url", columnDefinition = "TEXT")
   private Set<String> urls = new HashSet<>();
 
   @ElementCollection
-  @CollectionTable(
-      name = "wish_retailers",
-      joinColumns = @JoinColumn(name = "wish_id")
-  )
+  @CollectionTable(name = "wish_retailers", joinColumns = @JoinColumn(name = "wish_id"))
   @Column(name = "retailer")
   private Set<String> retailers = new HashSet<>();
 
   @ElementCollection
   @Enumerated(EnumType.STRING)
-  @CollectionTable(
-      name = "wish_methods",
-      joinColumns = @JoinColumn(name = "wish_id")
-  )
+  @CollectionTable(name = "wish_methods", joinColumns = @JoinColumn(name = "wish_id"))
   @Column(name = "method")
   private Set<WishMethod> methods = new HashSet<>(List.of(WishMethod.ONLINE));
 
@@ -132,6 +117,33 @@ public class Wish {
     wish.setRetailers(new HashSet<>(retailers));
     wish.setMethods(new HashSet<>(methods));
     return wish;
+  }
+
+  /**
+   * Replace current wish. The wish passed in will be removed after finishing the method.
+   *
+   * @param source the source wish
+   */
+  public void replaceWith(Wish source) {
+    name = source.getName();
+    price = source.getPrice();
+    note = source.getNote();
+    meter = source.getMeter();
+    quantity = source.getQuantity();
+    status = source.getStatus();
+    about = source.getAbout();
+    deadline = source.getDeadline();
+    creationDate = source.getCreationDate();
+    Set<Tag> tmpTags = new HashSet<>(tags);
+    tmpTags.forEach(this::removeTag);
+    source.tags.forEach(this::addTag);
+    tmpTags = new HashSet<>(source.tags);
+    tmpTags.forEach(source::removeTag);
+    tmpTags.clear();
+    conditions = source.getConditions();
+    urls = source.getUrls();
+    retailers = source.getRetailers();
+    methods = source.getMethods();
   }
 
   /**

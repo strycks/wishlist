@@ -70,7 +70,8 @@ public class WishlistService {
   /** Replace a wish. */
   @Transactional
   public WishResponseDTO replaceWish(long id, WishRequestDTO request) {
-    Wish wish = wishRepository.findById(id).orElseThrow(() -> new NotFoundException("Resource Not Found"));
+    Wish wish =
+        wishRepository.findById(id).orElseThrow(() -> new NotFoundException("Resource Not Found"));
     wish.replaceWith(mapToWish(request));
     return mapToResponse(wish);
   }

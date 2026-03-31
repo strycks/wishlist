@@ -3,6 +3,7 @@ package org.strycks.wishlist;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -11,20 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.strycks.wishlist.dto.WishRequestDTO;
-import org.strycks.wishlist.model.Wish;
 import tools.jackson.databind.ObjectMapper;
 
 @AutoConfigureMockMvc
 @SpringBootTest
 public class WishlistAppTest {
+  private final ObjectMapper objectMapper = new ObjectMapper();
   @Autowired
   private MockMvc mvc;
-
-  private final ObjectMapper objectMapper = new ObjectMapper();
 
   @Test
   public void getWishTest() throws Exception {
@@ -34,20 +31,44 @@ public class WishlistAppTest {
   }
 
   @Test
-  public void postWish() throws Exception {
+  public void postWishTest() throws Exception {
+    String query = "$['name']";
     mvc.perform(
         post("/api/wishlist").with(user("test"))
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(makeMockWishRequest())))
+            .content(objectMapper.writeValueAsString(makeMockWishRequest("syl"))))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.name").value("syl"));
+        .andExpect(jsonPath(query).value("syl"));
     mvc.perform(get("/api/wishlist/1").with(user("test")))
-        .andExpect(status().isOk());
+        .andExpect(status().isOk())
+        .andExpect(jsonPath(query).value("syl"));
   }
 
-  private WishRequestDTO makeMockWishRequest() {
+  @Test
+  public void putWishTest() throws Exception {
+    String query = "$['name']";
+    mvc.perform(
+        post("/api/wishlist").with(user("test"))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(makeMockWishRequest("syl")))
+        )
+        .andExpect(status().isCreated())
+        .andExpect(jsonPath(query).value("syl"));
+    mvc.perform(
+        put("/api/wishlist/1").with(user("test"))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(makeMockWishRequest("abc")))
+        )
+        .andExpect(status().isCreated())
+        .andExpect(jsonPath(query).value("abc"));
+    mvc.perform(get("/api/wishlist/1").with(user("test")))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath(query).value("abc"));
+  }
+
+  private WishRequestDTO makeMockWishRequest(String name) {
     WishRequestDTO w = new WishRequestDTO();
-    w.setName("syl");
+    w.setName(name);
     w.setQuantity(1);
     w.setPrice(1L);
     w.setMeter(1);

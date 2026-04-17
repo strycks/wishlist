@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.strycks.wishlist.dto.WishRequestDTO;
@@ -56,8 +57,8 @@ public class WishlistService {
    *
    * @return the all wishes
    */
-  public List<WishResponseDTO> getAllWishes() {
-    List<Wish> wishes = wishRepository.findAll();
+  public List<WishResponseDTO> getAllWishes(Pageable pageable) {
+    List<Wish> wishes = wishRepository.findAll(pageable).getContent();
     return wishes.stream().map(this::mapToResponse).toList();
   }
 

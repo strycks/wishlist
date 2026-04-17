@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Pageable;
 import org.strycks.wishlist.dto.WishRequestDTO;
 import org.strycks.wishlist.dto.WishResponseDTO;
 import org.strycks.wishlist.model.Wish;
@@ -50,7 +51,7 @@ public class WishlistServiceTest {
     Mockito.when(wishRepository.findAll()).thenReturn(wishes);
 
     List<String> names = List.of("bcd", "anc", "lop");
-    Assertions.assertEquals(names, wishlistService.getAllWishes().stream().map(WishResponseDTO::getName).toList());
+    Assertions.assertEquals(names, wishlistService.getAllWishes(Pageable.ofSize(10)).stream().map(WishResponseDTO::getName).toList());
   }
 
   @Test
